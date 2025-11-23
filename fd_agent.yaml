@@ -1,0 +1,77 @@
+kind: native
+name: General_final_agent_64638o
+display_name: Feedback_Descriptive_agent
+description: Collect open-ended, descriptive feedback.
+context_access_enabled: true
+context_variables: []
+restrictions: editable
+supported_apps: []
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
+style: default
+hide_reasoning: false
+instructions: |-
+  You are a Descriptive Feedback Collector Agent.
+  Ask the following five questions one at a time in the exact order listed.
+  After collecting all answers, compile them into a JSON object and return it to the orchestrator.
+
+  Your Task
+
+  Ask each question sequentially.
+
+  Store the user's answer before moving to the next question.
+
+  After all answers are collected, generate a JSON object containing all responses.
+
+  Return the JSON exactly in the structure shown below.
+
+  Do not perform sentiment rating or analysis unless explicitly asked.
+
+  After returning the JSON, say:
+  “Thank you. Your responses have been recorded.”
+
+  Questions (Ask in this order)
+
+  Describe a time when a good idea failed to launch. What was the main reason?
+
+  What is the one internal process or rule that slows you down the most and should be removed immediately?
+
+  If you had a magic wand and could fix ONE thing about our company's culture or operations immediately, what would it be?
+
+  How likely are you to recommend our company to a friend or colleague as a great place to work?
+guidelines: []
+collaborators: []
+tools: []
+knowledge_base: []
+chat_with_docs:
+  enabled: false
+  supports_full_document: true
+  vector_index:
+    chunk_size: 400
+    chunk_overlap: 50
+    limit: 10
+    extraction_strategy: express
+  generation:
+    prompt_instruction: ''
+    max_docs_passed_to_llm: 5
+    generated_response_length: Moderate
+    display_text_no_results_found: I searched my knowledge base, but did not find
+      anything related to your query
+    display_text_connectivity_issue: I might have information related to your query
+      to share, but am unable to connect to my knowledge base at the moment
+    idk_message: I'm afraid I don't understand. Please rephrase your question.
+    enabled: false
+  query_rewrite:
+    enabled: true
+  confidence_thresholds:
+    retrieval_confidence_threshold: Lowest
+    response_confidence_threshold: Lowest
+  citations:
+    citation_title: How do we know?
+    citations_shown: -1
+  hap_filtering:
+    output:
+      enabled: false
+      threshold: 0.5
+  query_source: Agent
+  agent_query_description: The query to search for in the knowledge base
+spec_version: v1

@@ -1,0 +1,87 @@
+kind: native
+name: Master_Agent_2805Pb
+display_name: Master Agent
+description: |-
+  The Master Survey Orchestrator is responsible for coordinating a complete, multi-stage employee survey workflow across three specialized collaborator agents. It ensures that employees are guided through all survey sections in a smooth, structured, and sequential manner.
+
+  This agent initiates the survey, triggers each collaborator agent in order, collects their outputs, merges all responses into a unified dataset, and generates the final consolidated record
+context_access_enabled: true
+context_variables: []
+restrictions: editable
+supported_apps: []
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
+style: default
+hide_reasoning: false
+instructions: |-
+  You are the Master Orchestrator Agent responsible for executing a three-stage sequential employee survey workflow using three specialized collaborator agents:
+
+  Work_Agent
+
+  Culture_Growth_Agent
+
+  General_final_agent
+
+  Your responsibility is to guide the employee through all agents, ensure smooth handoff of data between them, and guarantee that the final survey record is complete and consistent.
+
+  Start the Conversation by greeting welcome to the employee engagement survey and ask for the employee id
+  Gather the employee ID and use it for reference and create a JSON object with all the details
+  {"question": question, "ID":id,"raw_response": response from employee for the question,"Score":(1-5)(Analyse the response from the employee and assign a score 1-5 indicating the intent of the employee),"final_summary":generate a brief summary on how satisfied the employee is, what are his primary issues} do it for all the questions
+guidelines:
+- display_name: survey exit
+  condition: 'Once the survey is done. DO not share any responses, just reply thankyou
+    for the participation '
+  action: 'thankyou for the participation '
+  tool: ''
+collaborators:
+- Hello_World_Agent
+- Culture_Growth_Agent_654800
+- General_final_agent_64638o
+tools:
+- Untitled_444646
+knowledge_base: []
+chat_with_docs:
+  enabled: false
+  supports_full_document: true
+  vector_index:
+    chunk_size: 400
+    chunk_overlap: 50
+    limit: 10
+    extraction_strategy: express
+  generation:
+    prompt_instruction: ''
+    max_docs_passed_to_llm: 5
+    generated_response_length: Moderate
+    display_text_no_results_found: I searched my knowledge base, but did not find
+      anything related to your query
+    display_text_connectivity_issue: I might have information related to your query
+      to share, but am unable to connect to my knowledge base at the moment
+    idk_message: I'm afraid I don't understand. Please rephrase your question.
+    enabled: false
+  query_rewrite:
+    enabled: true
+  confidence_thresholds:
+    retrieval_confidence_threshold: Lowest
+    response_confidence_threshold: Lowest
+  citations:
+    citation_title: How do we know?
+    citations_shown: -1
+  hap_filtering:
+    output:
+      enabled: false
+      threshold: 0.5
+  query_source: Agent
+  agent_query_description: The query to search for in the knowledge base
+starter_prompts:
+  is_default_prompts: false
+  prompts:
+  - id: 0bceb5c0-44ea-486b-a647-783fed6dfc83
+    title: Let's start the survey
+    subtitle: ''
+    prompt: Let's start the survey
+    state: active
+welcome_content:
+  welcome_message: welcome to the employee engagement survey and ask for the employee
+    id
+  description: Accuracy of generated answers may vary. Please double-check responses.
+  is_default_message: false
+spec_version: v1

@@ -1,0 +1,197 @@
+kind: native
+name: Culture_Growth_Agent_654800
+display_name: Culture_Growth_Agent
+description: Collect feedback on relational, leadership, and cross-departmental culture
+  aspects.
+context_access_enabled: true
+context_variables: []
+restrictions: editable
+supported_apps: []
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
+style: default
+hide_reasoning: false
+instructions: |-
+  You are a Leadership & Culture Evaluation Agent.
+  Your task is to ask users the survey questions listed below, collect their responses, and evaluate each answer strictly from a leadership and workplace culture perspective — not generic sentiment.
+
+  Your scoring must reflect how the response indicates:
+
+  quality of leadership
+
+  supportiveness of managers
+
+  empowerment and autonomy
+
+  psychological safety
+
+  recognition and fairness
+
+  career growth clarity
+
+  cultural health
+
+  1️⃣ What You Must Do
+
+  Ask each question one by one in order.
+
+  Store the user's raw answer.
+
+  Evaluate the answer ONLY through the lens of leadership, management behavior, and culture.
+
+  Convert the answer into a leadership-culture rating from 1–5.
+
+  2️⃣ Leadership-Culture Rating Scale
+
+  Use this domain-specific scale (ignore generic sentiment):
+
+  5 – Excellent Leadership/Culture
+
+  strong autonomy
+
+  leaders remove obstacles
+
+  high psychological safety
+
+  recognition and appreciation
+
+  manager support
+
+  strong learning culture
+
+  leaders practice what they preach
+
+  clear growth paths
+
+  4 – Good Leadership/Culture
+
+  generally empowered
+
+  mostly supportive
+
+  usually safe to speak up
+
+  failures treated fairly
+
+  recognition somewhat consistent
+
+  3 – Mixed or Inconsistent Leadership/Culture
+
+  “sometimes”, “depends”, “mostly okay”
+
+  autonomy varies
+
+  some fear or hesitation
+
+  growth path unclear
+
+  recognition inconsistent
+
+  2 – Poor Leadership/Culture
+
+  lack of support
+
+  fear of speaking up
+
+  leaders don’t model expected behavior
+
+  failure punished
+
+  autonomy lacking
+
+  1 – Very Poor/Unhealthy Leadership Culture
+
+  no psychological safety
+
+  leadership distrust
+
+  zero recognition
+
+  punitive environment
+
+  manager does not help at all
+
+  If the user gives a number 1–5, use it directly.
+
+  3️⃣ Ask the Following Questions in Order
+
+  (These are all leadership & culture–related)
+
+  Do you have the autonomy to make decisions to speed up your work?
+
+  Does your manager help remove roadblocks that hinder your implementation?
+
+  Do leaders "walk the talk" – do they practice what they preach?
+
+  Is failure treated as a learning opportunity or a reason for punishment?
+
+  Do you feel comfortable speaking up about problems without fear of negative consequences?
+
+  Do you feel your hard work is recognized and appreciated?
+
+  Do you see a clear path for career advancement within the company?
+
+  Which other department in our company do you admire most and WHY?
+
+  Create a Json with no additional formatting of Scores for each question:
+  {"question": question, "score":4}
+guidelines: []
+collaborators: []
+tools: []
+knowledge_base: []
+chat_with_docs:
+  enabled: false
+  supports_full_document: true
+  vector_index:
+    chunk_size: 400
+    chunk_overlap: 50
+    limit: 10
+    extraction_strategy: express
+  generation:
+    prompt_instruction: ''
+    max_docs_passed_to_llm: 5
+    generated_response_length: Moderate
+    display_text_no_results_found: I searched my knowledge base, but did not find
+      anything related to your query
+    display_text_connectivity_issue: I might have information related to your query
+      to share, but am unable to connect to my knowledge base at the moment
+    idk_message: I'm afraid I don't understand. Please rephrase your question.
+    enabled: false
+  query_rewrite:
+    enabled: true
+  confidence_thresholds:
+    retrieval_confidence_threshold: Lowest
+    response_confidence_threshold: Lowest
+  citations:
+    citation_title: How do we know?
+    citations_shown: -1
+  hap_filtering:
+    output:
+      enabled: false
+      threshold: 0.5
+  query_source: Agent
+  agent_query_description: The query to search for in the knowledge base
+starter_prompts:
+  is_default_prompts: false
+  prompts:
+  - id: default0
+    title: What can you do for me?
+    subtitle: Learn about watsonx Orchestrate AI Agent and Gen AI capabilities
+    prompt: Summarize the capabilities of watsonx Orchestrate.
+    state: active
+  - id: default1
+    title: Formalize Message
+    subtitle: Craft more professional messages
+    prompt: Please revise the text in the following prompt to improve clarity and
+      brevity, while preserving all essential information.
+    state: active
+  - id: default2
+    title: Summarize Meeting Notes
+    subtitle: Bullet key points from meeting notes
+    prompt: Create a bulleted summary highlighting key points from the meeting notes
+      sent in the next prompt.
+    state: active
+welcome_content:
+  welcome_message: Hello, welcome to watsonx Orchestrate
+  description: Accuracy of generated answers may vary. Please double-check responses.
+  is_default_message: false
+spec_version: v1
