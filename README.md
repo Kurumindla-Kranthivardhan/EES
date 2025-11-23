@@ -16,7 +16,7 @@ streamlit run streamlit_app.py
 
 3. Or build/run with Docker (pass secrets as env or build-args).
 
-## List Agents (use API or UI — avoid curl examples)
+## List Agents (use API or UI)
 Instead of providing curl command examples, use the Orchestrate web UI for manual inspection, or use a short Python httpx snippet to list agents programmatically. The code below shows how to obtain an IAM bearer token and call the Orchestrate "agents list" endpoint (GET /v1/orchestrate/agents). Replace placeholders with your values.
 
 Python example (httpx):
@@ -83,3 +83,4 @@ Notes:
 - https://www.ibm.com/docs/en/watsonx/watson-orchestrate/base?topic=api-getting-endpoint
 - https://developer.watson-orchestrate.ibm.com/apis/orchestrate-agent/get-orchestrate-assistant-run
 - https://developer.ibm.com/tutorials/getting-started-with-watsonx-orchestrate/
+
